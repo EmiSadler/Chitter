@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome to Chitter!</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>Time to Chitter away!</h1>
+    <form action="/Chitter" method="post">
+      <p>
+        <label for="content">Peep:</label>
+        <input type="text" name="content" id="content">
+      </p>
+      <p>
+        <input type="submit" value="Peep!">
+      </p>
+    </form>
+
+    <h1>Peeps:</h1>
+
+    {% for peep in peeps %}
+      <article>
+        <h2 class="t-content">{{ peep.content }}</h2>
+        <p class="t-date_time">{{ peep.date_time }}</p>
+      </article>
+    {% endfor %}
+  </body>
+</html>
