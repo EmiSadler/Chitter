@@ -25,6 +25,6 @@ class PeepRepository:
         rows = self._connection.execute('SELECT * from peeps')
         peeps = []
         for row in rows:
-            item = Peep(row["id"], row["username"], row["content"], row["date_time"])
+            item = Peep(row["id"], row["username"], row["content"], row["date_only"], row["time_only"])
             peeps.append(item)
         return peeps

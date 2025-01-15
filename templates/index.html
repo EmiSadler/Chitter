@@ -20,9 +20,13 @@
 
     {% for peep in peeps %}
       <article>
+        <p class="t-username">{{ peep.username }}</p>
         <p class="t-content">"{{ peep.content }}"</p>
-        <p class="t-date_time">{{ peep.date_time }}</p>
+        <p class="t-date_only">{{ peep.date_only }}</p>
+        <p class="t-time_only">{{ peep.time_only }}</p>
       </article>
     {% endfor %}
+    <a href="/Chitter/login">Login</a>
   </body>
 </html>
+
