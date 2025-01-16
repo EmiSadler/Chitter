@@ -20,7 +20,8 @@ CREATE TABLE peeps (
     content VARCHAR(255),
     date_only DATE DEFAULT CURRENT_DATE,  -- Only stores date (YYYY-MM-DD)
     time_only TIME(0) DEFAULT CURRENT_TIME, -- Only stores time (HH:MM)
-    users_id int
+    users_id int,
+    picture_id VARCHAR(255)
 );
 
 

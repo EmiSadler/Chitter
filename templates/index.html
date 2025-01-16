@@ -84,13 +84,22 @@ body {
 .individual_peep {
   background-color: #c4ebee;
   width: 80%;
+  border-radius: 5px 50px 50px 50px;
   border: 15px solid #117d75;;
-  padding: 50px;
+  padding: 25px;
   margin: 20px;
 }
 .t-username {
   font-size: 20px;
   font-weight: bold;
+}
+.t-content {
+  font-size: 27px;
+}
+.t-date_only {
+  font-size: 15px;
+  font-style: italic;
+  text-align: right;
 }
 </style>
 </style>
@@ -120,10 +129,16 @@ body {
 
 
   {% for peep in peeps|reverse %}
-    <article class="individual_peep">
-      <p class="t-username">{{ peep.username }} says, "{{peep.content }}"</p>
+  <article class="individual_peep">
+    <div class="left-column">
+      <p class="t-username">{{ peep.username }} says, </p>
+      <img class="user-image" src="{{ url_for('static', filename='images/green_bird.png') }}" alt="{{ peep.username }}'s image">
+    </div>
+    <div class="right-column">
+      <p class="t-content">"{{ peep.content }}"</p>
       <p class="t-date_only">{{ peep.date_only }} -- {{ peep.time_only }}</p>
-    </article>
+    </div>
+  </article>
   {% endfor %}
 </div>
 

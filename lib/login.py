@@ -1,10 +1,11 @@
 
 class Login:
-    def __init__(self, id, username, email, password):
+    def __init__(self, id, username, email, password, picture_id):
         self.id = id
         self.username = username
         self.email = email
         self.password =  password
+        self.picture_id = picture_id
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__

@@ -1,30 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>Welcome to Chitter!</title>
     <meta charset="utf-8">
-  </head>
-  <body>
-    <h1>Create A Chitter Account</h1>
-    <form action="/Chitter/create_account" method="post">
-        {% if errors %}
-    <ul>
-        {% for error in errors %}
-            <li>{{ error }}</li>
-        {% endfor %}
-    </ul>
-  {% endif %}
-      <p>
-        <label for="email">enter email:</label>
-        <input type="email" name="email" id="email">
-        <label for="username">enter username:</label>
-        <input type="text" name="username" id="username">
-        <label for="password">enter password:</label>
-        <input type="password" name="password" id="password">
-      </p>
-      <p>
-        <input type="submit" value="Login">
-      </p>
-    </form>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #F4F4F4;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .image-selection {
+            margin-bottom: 20px;
+        }
+        .images {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .selectable-image {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border 0.3s;
+            border-radius: 10px;
+        }
+        .selectable-image.selected {
+            border: 2px solid #3498DB;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3498DB;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #2980B9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create A Chitter Account</h1>
+        <form action="/Chitter/create_account" method="post">
+            {% if errors %}
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <p>
+                <label for="email">Enter email:</label>
+                <input type="email" name="email" id="email" required>
+            </p>
+            <p>
+                <label for="username">Enter username:</label>
+                <input type="text" name="username" id="username" required>
+            </p>
+            <p>
+                <label for="password">Enter password:</label>
+                <input type="password" name="password" id="password" required>
+            </p>
+            <!-- Image selection -->
+            <div class="image-selection">
+                <p>Select your image:</p>
+                <div class="images">
+                    <img src="{{ url_for('static', filename='images/green_bird.png') }}" alt="Green Bird" class="selectable-image" data-image="green_bird">
+                    <img src="{{ url_for('static', filename='images/blue_bird.png') }}" alt="Blue Bird" class="selectable-image" data-image="blue_bird">
+                    <img src="{{ url_for('static', filename='images/yellow_bird.png') }}" alt="Yellow Bird" class="selectable-image" data-image="yellow_bird">
+                    <img src="{{ url_for('static', filename='images/red_bird.png') }}" alt="Red Bird" class="selectable-image" data-image="red_bird">
+                </div>
+                <input type="hidden" name="selected_image" id="picture_id">
+                <div id="selectedImageMessage"></div>
+            </div>
+            <p>
+                <input type="submit" value="Create Account">
+            </p>
+        </form>
+    </div>
 
+    <script>
+        const images = document.querySelectorAll('.selectable-image');
+        const hiddenInput = document.getElementById('picture_id');
+        const messageDiv = document.getElementById('selectedImageMessage');
 
+        images.forEach(image => {
+            image.addEventListener('click', () => {
+                // Remove the 'selected' class from all images
+                images.forEach(img => img.classList.remove('selected'));
+
+                // Add 'selected' class to the clicked image
+                image.classList.add('selected');
+
+                // Update the hidden input value
+                const imageValue = image.getAttribute('data-image');
+                hiddenInput.value = imageValue;
+
+                // Show feedback to the user
+                messageDiv.textContent = `Selected Image: ${imageValue}`;
+            });
+        });
+    </script>
+</body>
+</html>

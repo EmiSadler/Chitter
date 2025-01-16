@@ -93,7 +93,7 @@ def create_account_page():
 def create_new_user():
     connection = get_flask_database_connection(app)
     repository = LoginRepository(connection)
-    new_user = Login(None, request.form['username'], request.form['email'], request.form['password'])
+    new_user = Login(None, request.form['username'], request.form['email'], request.form['password'], request.form['picture_id'])
     if not new_user.is_valid():
         return render_template('create_account.html', new_user=new_user, errors=new_user.generate_errors()), 400
     repository.create_user(new_user.username, new_user.email, new_user.password)
