@@ -5,10 +5,10 @@ class PeepRepository:
         self._connection = connection
     
     
-    def create(self, content):
+    def create(self, username, content, users_id):
         self._connection.execute(
-            'INSERT INTO peeps (content) VALUES (%s)',
-            [content])
+            'INSERT INTO peeps (username, content, users_id) VALUES (%s, %s, %s)',
+            [username, content, users_id])
         return None
     # def create(self, content, date_time):
     #     peep = Peep(len(self.peeps) + 1, content, date_time)
@@ -25,6 +25,6 @@ class PeepRepository:
         rows = self._connection.execute('SELECT * from peeps')
         peeps = []
         for row in rows:
-            item = Peep(row["id"], row["username"], row["content"], row["date_only"], row["time_only"])
+            item = Peep(row["id"], row["username"], row["content"], row["date_only"], row["time_only"], row["users_id"])
             peeps.append(item)
         return peeps

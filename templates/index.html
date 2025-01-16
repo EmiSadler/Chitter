@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Welcome to Chitter!</title>
@@ -28,5 +28,113 @@
     {% endfor %}
     <a href="/Chitter/login">Login</a>
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Welcome to Chitter!</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #c4ebee;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #85cdd2;
+  color: black;
+}
+
+/* Style the content */
+.content {
+  background-color: #85cdd2;
+  padding: 10px;
+  /* height: 200px; Should be removed. Only for demonstration */
+}
+
+/* Style the footer */
+.footer {
+  background-color: #117d75;
+  padding: 10px;
+}
+.individual_peep {
+  background-color: #c4ebee;
+  width: 80%;
+  border: 15px solid #117d75;;
+  padding: 50px;
+  margin: 20px;
+}
+.t-username {
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>
+</style>
+</head>
+
+
+<div class="topnav">
+  <a href="/Chitter/login">Login</a>
+  <a href="#">My Nest</a>
+  <a href="/Chitter/logout">Logout</a>
+</div>
+<body>
+    {% if session['users_id'] %}
+  Welcome, {{ session['username'] }}</h1>
+
+  <form action="/Chitter" method="post">
+    <p>
+      <label for="content">Peep:</label>
+      <input type="text" name="content" id="content">
+    </p>
+    <p>
+      <input type="submit" value="Peep!">
+    </p>
+  </form>
+  <h1>Peeps:</h1>
+<div class="content">
+
+
+  {% for peep in peeps|reverse %}
+    <article class="individual_peep">
+      <p class="t-username">{{ peep.username }} says, "{{peep.content }}"</p>
+      <p class="t-date_only">{{ peep.date_only }} -- {{ peep.time_only }}</p>
+    </article>
+  {% endfor %}
+</div>
+
+<div class="footer">
+  <p>We've run out of peeps! Oh no! Peep some more quick!</p>
+</div>
+{% else %}
+  <h1>Please log in to access your dashboard.</h1>
+  <a href="/Chitter/login">Login</a>
+{% endif %}</h1>
+</body>
 </html>
+
 

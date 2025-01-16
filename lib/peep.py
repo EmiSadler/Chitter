@@ -1,12 +1,13 @@
 from datetime import datetime
 
 class Peep:
-    def __init__(self, id, username, content, date_only, time_only):
+    def __init__(self, id, username, content, date_only, time_only, users_id):
         self.id = id
         self.username = username
         self.content = content
         self.date_only = date_only
         self.time_only = time_only
+        self.users_id = users_id
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
