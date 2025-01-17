@@ -31,3 +31,4 @@ class Login:
         if self.password == None or self.password == "":
             errors.append("Password is required")
         return errors
+    
